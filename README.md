@@ -1,3 +1,4 @@
+
 # Projeto_3Semestre
 
 
@@ -6,3 +7,6 @@
 * Banco de Dados: @Vitor
 * FrontEnd: @Akin @Thiago
 * Arquitetura: @Marcos
+
+# Descrição
+Neste projeto o nosso grupo irá aprensentar um sistem completo com backend , frontend e banco de dados
