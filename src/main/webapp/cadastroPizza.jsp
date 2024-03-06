@@ -19,7 +19,7 @@
 		Connection con = conecta.getConnection();
 		out.println("ok2");
 		out.println(con);
-		String sql = "INSERT INTO tbPizza (nome_pizza,descricao_pizza,caminho_img,valor) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO tbPizza (nomePizza,decricao_Pizza,caminho_imgPizza,valor_Pizza) VALUES (?,?,?,?)";
 		
 		PreparedStatement stmt = con.prepareStatement(sql);
 		stmt.setString(1,nomePizza);
