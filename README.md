@@ -5,7 +5,7 @@
 # Equipes
 * Backend: @GustavoBasilio @Marcos @Leonardo
 * Banco de Dados: @Vitor
-* FrontEnd: @Akin @Thiago
+* FrontEnd: @Akin(o pai) @Thiago
 * Arquitetura: @Marcos
 
 # Descrição
