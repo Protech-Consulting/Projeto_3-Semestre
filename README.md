@@ -9,7 +9,7 @@
 * Arquitetura: @Marcos
 
 # Descrição
-Neste projeto o nosso grupo irá aprensentar um sistem completo com backend , frontend e banco de dados
+Neste projeto o nosso grupo irá aprensentar um sistem completo com backend , frontend e banco de dados Test
 
 # Atualizações
 
