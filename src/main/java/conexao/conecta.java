@@ -16,7 +16,7 @@ public class conecta {
 			return DriverManager.getConnection(connectionUrl,usuario,senha);
 		}
 		catch(ClassNotFoundException e) {
-			System.out.print("Erro" + e);
+			System.out.print("Erro na Conexão com o Banco de Dados" + e);
 			throw new SQLException(e.getException());
 		}
 		

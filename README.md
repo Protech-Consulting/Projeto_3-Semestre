@@ -17,3 +17,4 @@ Neste projeto o nosso grupo irá aprensentar um sistem completo com backend , fr
 * 07/03 Implementação de Aquitetura MVC começando pela criação das estuturas de pastas model,view e controller
 * 13/03 Adicionado a Classe de Pizza JavaBeans nome do arquivo `PizzaBeans.java` e adicionada pasta view com FrontEnd
 * 14/03 Adicionado a Classe de Pizza JavaBeans nome do arquivo `UsuarioBeans.java` e `PedidoClienteBeans.java`
+* 17/03 Teste de Interações entre as classes PizzaDAO e PizzaBeans puxando uma select do banco de dados
