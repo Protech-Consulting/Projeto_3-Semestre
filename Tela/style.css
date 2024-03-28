@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.navbar {
+  padding: 10px;
+}
+
+.navbar-brand {
+  margin-right: 20px;
+  color: #c8102e;
+  text-decoration: none;
+  letter-spacing: normal;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: start;
+
+}
+
+.fas {
+  margin-right: 20px;
+
+}
+
+.container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 500px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.options {
+  margin-top: 20px;
+}
+
+.options a {
+  margin-right: 10px;
+  color: red;
+  text-decoration: none;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+.google-btn {
+  background-color: #000000;
+  /* Cor de fundo */
+  color: white;
+  /* Cor do texto */
+  border: none;
+  /* Remove a borda */
+  padding: 10px 20px;
+  /* Espaçamento interno */
+  border-radius: 5px;
+  /* Borda arredondada */
+  cursor: pointer;
+  /* Cursor ao passar o mouse */
+  display: inline-block;
+  /* Exibir como um bloco */
+  margin-top: 10px;
+  /* Espaçamento superior */
+}
+
+/* Estilo quando o cursor está sobre o botão */
+.google-btn:hover {
+  background-color: #c74333;
+  /* Altera a cor de fundo no hover */
+  opacity: 1;
+}
