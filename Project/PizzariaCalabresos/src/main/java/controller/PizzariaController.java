@@ -19,25 +19,27 @@ import model.PizzaDAO;
  * Servlet implementation class PizzariaController
  */
 @WebServlet(urlPatterns = { "/cadastrarPizza", "/viewCadastrarPizza", "/cardapio", "/consultarPizza",
-		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza" })
+		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza","/consultarPesquisaPizza" })
 public class PizzariaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PizzaDAO daoPizza = new PizzaDAO();
 	PizzaBeans beansPizza = new PizzaBeans();
 	Gson gson = new Gson();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PizzariaController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public PizzariaController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getServletPath();
 		System.out.print(action);
@@ -53,6 +55,9 @@ public class PizzariaController extends HttpServlet {
 		} else if (action.equals("/consultarPorTipoPizza")) {
 			System.out.print("IF");
 			ConsultarTipoPizza(request, response);
+		} else if (action.equals("/consultarPesquisaPizza")) {
+			System.out.print("IF");
+			ConsultarPesquisaPizza(request, response);
 		} else if (action.equals("/deletarPizza")) {
 			System.out.print("IF");
 			DeletarPizza(request, response);
@@ -60,9 +65,11 @@ public class PizzariaController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getServletPath();
 		System.out.print(action);
@@ -72,6 +79,7 @@ public class PizzariaController extends HttpServlet {
 			AtualizarPizza(request, response);
 		}
 	}
+
 	protected void telaCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.sendRedirect("view/cadastroPizza.jsp");
@@ -148,6 +156,15 @@ public class PizzariaController extends HttpServlet {
 		System.out.printf("Aqui");
 		String tipo = request.getParameter("txtTipoPizza");
 		ArrayList<PizzaBeans> listaPizza = daoPizza.consultaTipoPizzas(tipo);
+		response.getWriter().append(gson.toJson(listaPizza));
+	}
+	protected void ConsultarPesquisaPizza(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		System.out.printf("Aqui");
+		String pesquisa = request.getParameter("txtPesquisaPizza")+"%";
+		String descricao = request.getParameter("txtPesquisaPizza")+"%";
+		ArrayList<PizzaBeans> listaPizza = daoPizza.pesquisaPizzas(pesquisa,descricao);
 		response.getWriter().append(gson.toJson(listaPizza));
 	}
 

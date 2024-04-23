@@ -65,6 +65,45 @@ public class PizzaDAO {
 		return pizzas;
 
 	}
+//Pesquisa Dinamica
+	public ArrayList<PizzaBeans> pesquisaPizzas(String pesquisa,String descricao) {
+		System.out.print("OK");
+		ArrayList<PizzaBeans> pizzas = new ArrayList<>();
+		String sql = "select* from tbpizzas where nome_pizza like ? or descricao_pizza like ?";
+		try {
+			Connection conn = conecta.getConnection();
+			System.out.print("OK");
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			System.out.print(stmt);
+			stmt.setString(1, pesquisa);
+			stmt.setString(2, descricao);
+			System.out.print(stmt);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int idPizza = rs.getInt(1);
+				String nomePizza = rs.getString(2);
+				String caminhoPizza = rs.getString(3);
+				String descricaoPizza = rs.getString(4);
+				Double valorPizza = rs.getDouble(5);
+				Boolean estoquePizza = rs.getBoolean(6);
+				String tipoPizza = rs.getString(7);
+
+				System.out.print("Valor rs 5 :" + rs.getInt(5));
+
+				pizzas.add(new PizzaBeans(idPizza, nomePizza ,caminhoPizza, descricaoPizza, valorPizza, estoquePizza,
+						tipoPizza));
+
+			}
+			stmt.executeQuery();
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+			System.out.print("ERRO: " + e);
+		}
+		return pizzas;
+
+	}
+
 //Consulta Pizza por ID
 	public ArrayList<PizzaBeans> consultaIdPizzas(Integer id) {
 		System.out.print("OK");

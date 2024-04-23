@@ -13,6 +13,7 @@
 <script defer src="./JS/select.js"></script>
 </head>
 <body>
+<input type =text id=txtPesquisa>
 <select class="form-select" aria-label="Default select example" id="selectTipoPizza">
 	  <option selected>Selecione</option>
 	  <option value="doce">Doce</option>

@@ -108,9 +108,13 @@ public class UsuarioController extends HttpServlet {
 		if (listaUsuario.isEmpty() == true || listaUsuario == null ) {
 			System.out.print("Vazio");
 			response.getWriter().append("Dados não Encontrados");
+			response.getWriter().append(gson.toJson(listaUsuario));
 		}
 		else {
 			System.out.print("Dados Aqui");
+			response.getWriter().append("");
+			response.getWriter().append("Dados Encontrados");
+			response.getWriter().append("");
 			response.getWriter().append(gson.toJson(listaUsuario));
 		}
 		
