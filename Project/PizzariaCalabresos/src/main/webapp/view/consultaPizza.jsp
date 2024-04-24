@@ -13,7 +13,15 @@
 <script defer src="./JS/select.js"></script>
 </head>
 <body>
-<input type =text id=txtPesquisa>
+<label for="exampleDataList" class="form-label">Datalist example</label>
+<input class="form-control" list="datalistOptions" id=txtPesquisa placeholder="Type to search...">
+<datalist id="datalistOptions">
+  <option value="San Francisco">
+  <option value="New York">
+  <option value="Seattle">
+  <option value="Los Angeles">
+  <option value="Chicago">
+</datalist>
 <select class="form-select" aria-label="Default select example" id="selectTipoPizza">
 	  <option selected>Selecione</option>
 	  <option value="doce">Doce</option>
