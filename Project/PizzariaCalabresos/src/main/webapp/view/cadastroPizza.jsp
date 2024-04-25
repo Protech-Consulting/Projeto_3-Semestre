@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="../cadastrarPizza" method="post">
+	<form action="../cadastrarPizza" method="post" enctype="multipart/form-data">
 		<input type="text" name="txtNomePizza" placeholder="Digite o Nome da Pizza">
-		<input type="text" name="txtCaminhoImgPizza" placeholder="Digite o Caminho da Imagem da Pizza">
+		<input type="file" name="txtCaminhoImgPizza" placeholder="Digite o Caminho da Imagem da Pizza">
 		<input type="text" name="txtDescricaoPizza" placeholder="Digite a Descrição da Pizza">
 		<input type="text" name="txtValorPizza" placeholder="Digite o Valor da Pizza">
 		<input type="checkbox" name="txtEstoquePizza" value =TRUE placeholder="Digite o Estoque da Pizza">
