@@ -17,3 +17,10 @@ O sistema é baseado em JAVA mas claro que utilizamos outras linguagens como Jav
 
 # Técnicas de Programação
 
+* Padronização MVC (Model, View e Controller)
+    * Model - Responsável pela criação de classes onde determinamos o tipo de variaveis do Objeto
+        * Dao - Classe responsavel pelas funçoes relacionadas com o banco de dados fazendo o CRUD (Create,Read,Update e Delete)
+    * View - Telas aonde são as interações do usuário com a aplicação
+    * Controller - Responsável por fazer o controle entre as requisições e respostas do usuario pegando os dados e criando um objeto da model e realizando os setters para cadastrar por exemplo
+* Utilizando a controller como API para retorno de Objetos Json para consultas dinâmicas nas views com JS
+
