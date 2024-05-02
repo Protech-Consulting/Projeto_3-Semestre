@@ -28,7 +28,7 @@
 	  <option value="salgada">Salgada</option>
 	  <option value="todas">Todos os tipos</option>
 </select>
-<div class="container d-flex flex-wrap">
+<div class="container d-flex flex-wrap pizzas">
 	<%
 	ArrayList<PizzaBeans> listaPizza = (ArrayList<PizzaBeans>) request.getAttribute("pizzas");
 	for (int i = 0; i < listaPizza.size(); i++) {

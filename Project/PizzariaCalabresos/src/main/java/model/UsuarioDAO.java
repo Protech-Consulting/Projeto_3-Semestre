@@ -114,4 +114,29 @@ public class UsuarioDAO {
 		return usuario;
 
 	}
+	public void editarUsuario(UsuarioBeans usuario) {
+		try {
+			Connection conn = conecta.getConnection();
+			String sql = "UPDATE tbusuario SET user_usuario = ?,password_usuario = ?,nivel_acesso_usuario = ?,nome_usuario = ?,cpf_usuario = ?,complemento_usuario = ?,celular_usuario = ?,rua_usuario = ?,bairro_usuario = ?, numeroCasa_usuario = ? WHERE id_usuario = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, usuario.getUser_Usuario());
+			stmt.setString(2, usuario.getPassword_Usuario());
+			stmt.setInt(3, usuario.getNivel_acesso_Usuario());
+			stmt.setString(4, usuario.getNome_Usuario());
+			stmt.setString(5, usuario.getCpf_Usuario());
+			stmt.setString(6, usuario.getComplemento_Usuario());
+			stmt.setString(7, (usuario.getCelular_Usuario()));
+			stmt.setString(8, usuario.getRua_Usuario());
+			stmt.setString(9, usuario.getBairro_Usuario());
+			stmt.setInt(10, usuario.getNumeroCasa_Usuario());
+			stmt.setInt(11,usuario.getId_Usuario());
+			System.out.print(stmt);
+			stmt.execute();
+			stmt.close();
+			conn.close();
+			System.out.print("OK");
+		} catch (Exception e) {
+			System.out.print("ERRO: " + e);
+		}
+	}
 }

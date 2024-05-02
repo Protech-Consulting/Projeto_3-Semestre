@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import conexao.conecta;
 import model.PizzaBeans;
 import model.UsuarioBeans;
 import model.UsuarioDAO;
@@ -18,7 +21,7 @@ import model.UsuarioDAO;
 /**
  * Servlet implementation class UsuarioController
  */
-@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/cadastrarUsuario","/logarUsuario"})
+@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/cadastrarUsuario","/logarUsuario","/editarUsuario"})
 public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UsuarioDAO daoUsuario = new UsuarioDAO();
@@ -49,7 +52,10 @@ public class UsuarioController extends HttpServlet {
 		}
 		else if (action.equals("/logarUsuario")) {
 			LoginUsuario(request, response);
-			}
+		}
+		else if (action.equals("/editarUsuario")) {
+			EditarUsuario(request, response);
+		}
 	}
 
 	/**
@@ -70,7 +76,7 @@ public class UsuarioController extends HttpServlet {
 	}
 	protected void CadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String user = "user";
+		String user = "user123";
 		String password = "Gus";
 		int nivel_acesso = 1;
 		String nome = "Gus";
@@ -101,7 +107,7 @@ public class UsuarioController extends HttpServlet {
 	protected void LoginUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String user = "user";
-		String password = "Gus";
+		String password = "Gus123";
 		password = security.Criptografia.criptografar(password);
 		ArrayList<UsuarioBeans> listaUsuario = daoUsuario.loginUsuario(user,password);
 		
@@ -118,6 +124,47 @@ public class UsuarioController extends HttpServlet {
 			response.getWriter().append(gson.toJson(listaUsuario));
 		}
 		
+	}
+	
+	protected void EditarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String user = "user";
+		String password = "Gus123";
+		int nivel_acesso = 1;
+		String nome = "GusTavo";
+		String cpf = "12345678910";
+		String complemento = "rua do cara mais lindo de todos";
+		String celular = "11961535779";
+		String rua = "Rua Elias checone";
+		String  bairro = "Vila rosalina";
+		int numero = 25;
+		password = security.Criptografia.criptografar(password);
+		beansUsuario.setUser_Usuario(user);
+		beansUsuario.setPassword_Usuario(password);
+		beansUsuario.setNivel_acesso_Usuario(nivel_acesso);
+		beansUsuario.setNome_Usuario(nome);
+		beansUsuario.setCpf_Usuario(cpf);
+		beansUsuario.setComplemento_Usuario(complemento);
+		beansUsuario.setCelular_Usuario(celular);
+		beansUsuario.setRua_Usuario(rua);
+		beansUsuario.setBairro_Usuario(bairro);
+		beansUsuario.setNumeroCasa_Usuario(numero);
+		beansUsuario.setId_Usuario(11);
+		daoUsuario.editarUsuario(beansUsuario);
+	}
+	public void DeletarUsuario (Integer id) {
+		String sql = "DELETE from tbusuario WHERE id_usuario = ?";
+		try {
+			Connection conn = conecta.getConnection();
+			System.out.print("OK");
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+			System.out.print("ERRO: " + e);
+		}
 	}
 
 }
