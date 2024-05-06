@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -72,6 +73,19 @@ public class UsuarioController extends HttpServlet {
 	}
 	protected void TelaCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Object cd = session.getValue("id_usuario");
+		response.getWriter().append("Código Usuario"+cd.toString());
+		Object nv = session.getValue("nivel_usuario");
+		System.out.print("Dados Aqui");
+		System.out.print(cd);
+		if (nv.equals(2)) {
+			System.out.print("Adminastro");
+		}
+		else {
+			System.out.print("Usuario");
+		}
+		
 		response.sendRedirect("view/cadastroUsuario.jsp");
 	}
 	protected void CadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -122,6 +136,15 @@ public class UsuarioController extends HttpServlet {
 			response.getWriter().append("Dados Encontrados");
 			response.getWriter().append("");
 			response.getWriter().append(gson.toJson(listaUsuario));
+			HttpSession session = request.getSession();
+			session.putValue("id_usuario",listaUsuario.get(0).getId_Usuario());
+			session.putValue("nivel_usuario",listaUsuario.get(0).getNivel_acesso_Usuario());
+			
+			System.out.print(session.getValue("id_usuario"));
+			Object nv = session.getValue("nivel_usuario");
+			Object cd = session.getValue("id_usuario");
+			response.getWriter().append("Código Usuario"+cd.toString());
+			response.getWriter().append("Nivel Usuario"+nv.toString());
 		}
 		
 	}
