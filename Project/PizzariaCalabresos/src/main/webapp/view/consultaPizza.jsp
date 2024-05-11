@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="model.PizzaBeans"%>
 <%@ page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
 <meta charset="UTF-8">
 <title>Consulta Pizza</title>
 <script defer src="./JS/select.js"></script>
+<script defer src="./JS/button-pedido.js"></script>
 </head>
 <body>
 <label for="exampleDataList" class="form-label">Datalist example</label>
@@ -48,7 +50,7 @@
 			<h4 class="font-weight-bold text-center">Valor: R$ <%=listaPizza.get(i).getValor_Pizza()%></h4>
 			<%= listaPizza.get(i).isEstoque_Pizza()%> <br>
 			<%= listaPizza.get(i).getTipo_Pizza()%> <br>
-			<br> <a href="#" class="btn btn-danger">Confira</a>
+			<br> <button name="btn-confira" onClick="realizarPedido(<%=listaPizza.get(i).getId_Pizza()%>)" class="btn btn-danger" value="<%=listaPizza.get(i).getId_Pizza()%>">Confira</button>
 		</div>
 	</div>
 	<%

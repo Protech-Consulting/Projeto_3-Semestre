@@ -22,7 +22,7 @@ import model.UsuarioDAO;
 /**
  * Servlet implementation class UsuarioController
  */
-@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/cadastrarUsuario","/logarUsuario","/editarUsuario"})
+@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/cadastrarUsuario","/logarUsuario","/editarUsuario","/deslogarUsuario"})
 public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UsuarioDAO daoUsuario = new UsuarioDAO();
@@ -56,6 +56,9 @@ public class UsuarioController extends HttpServlet {
 		}
 		else if (action.equals("/editarUsuario")) {
 			EditarUsuario(request, response);
+		}
+		else if (action.equals("/deslogarUsuario")) {
+			DeslogarUsuario(request, response);
 		}
 	}
 
@@ -120,8 +123,10 @@ public class UsuarioController extends HttpServlet {
 	}
 	protected void LoginUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String user = "user";
-		String password = "Gus123";
+		//String user = "user";
+		//String password = "Gus123";
+		String user = "user123";
+		String password = "Gus";
 		password = security.Criptografia.criptografar(password);
 		ArrayList<UsuarioBeans> listaUsuario = daoUsuario.loginUsuario(user,password);
 		
@@ -147,6 +152,13 @@ public class UsuarioController extends HttpServlet {
 			response.getWriter().append("Nivel Usuario"+nv.toString());
 		}
 		
+	}
+	protected void DeslogarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException,IOException{
+		HttpSession session = request.getSession();
+		session.invalidate();
+		System.out.println("Usuario Deslogado");
+		response.sendRedirect("view/cadastroUsuario.jsp");
 	}
 	
 	protected void EditarUsuario(HttpServletRequest request, HttpServletResponse response)
