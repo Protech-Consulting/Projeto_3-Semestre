@@ -1,14 +1,17 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
@@ -18,8 +21,10 @@ import model.PizzaDAO;
 /**
  * Servlet implementation class PizzariaController
  */
+
 @WebServlet(urlPatterns = { "/cadastrarPizza", "/viewCadastrarPizza", "/cardapio", "/consultarPizza",
-		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza","/consultarPesquisaPizza" })
+		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza","/consultarPesquisaPizza", "/consultarPorIdPizza" })
+@MultipartConfig
 public class PizzariaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PizzaDAO daoPizza = new PizzaDAO();
@@ -62,6 +67,9 @@ public class PizzariaController extends HttpServlet {
 			System.out.print("IF");
 			DeletarPizza(request, response);
 		}
+		else if (action.equals("/consultarPorIdPizza")) {
+			ConsultarPizzaPorId(request, response);
+		}
 	}
 
 	/**
@@ -91,11 +99,24 @@ public class PizzariaController extends HttpServlet {
 		// Setando dados no Objeto PizzaBeans
 		System.out.println(request.getParameter("txtEstoquePizza"));
 		beansPizza.setNome_Pizza(request.getParameter("txtNomePizza"));
-		beansPizza.setCaminho_img_Pizza(request.getParameter("txtCaminhoImgPizza"));
 		beansPizza.setDescricao_Pizza(request.getParameter("txtDescricaoPizza"));
 		beansPizza.setValor_Pizza(Double.parseDouble(request.getParameter("txtValorPizza")));
 		beansPizza.setEstoque_Pizza(Boolean.parseBoolean(request.getParameter("txtEstoquePizza")));
 		beansPizza.setTipo_Pizza(request.getParameter("txtTipoPizza"));
+		
+		String path = getServletContext().getRealPath("uploads"); 
+		try {
+			for(Part part : request.getParts()) {
+				if (part.getName().equals("txtCaminhoImgPizza")) {
+					System.out.println(path+File.separator+part.getSubmittedFileName());
+					part.write(path+File.separator+part.getSubmittedFileName());
+					beansPizza.setCaminho_img_Pizza("uploads/"+part.getSubmittedFileName());
+				}
+			}
+		}
+		catch(Exception e) {
+			
+		}
 
 		System.out.println(beansPizza.isEstoque_Pizza());
 		System.out.println(beansPizza.getNome_Pizza());
@@ -165,6 +186,13 @@ public class PizzariaController extends HttpServlet {
 		String pesquisa = request.getParameter("txtPesquisaPizza")+"%";
 		String descricao = request.getParameter("txtPesquisaPizza")+"%";
 		ArrayList<PizzaBeans> listaPizza = daoPizza.pesquisaPizzas(pesquisa,descricao);
+		response.getWriter().append(gson.toJson(listaPizza));
+	}
+
+	protected void ConsultarPizzaPorId(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Integer id = Integer.parseInt(request.getParameter("txtIdPizza"));
+		ArrayList<PizzaBeans> listaPizza = daoPizza.consultaIdPizzas(id);
 		response.getWriter().append(gson.toJson(listaPizza));
 	}
 

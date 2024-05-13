@@ -1,5 +1,6 @@
 select = document.querySelector('#selectTipoPizza')
 pesquisa = document.querySelector('#txtPesquisa')
+divPizzas = document.querySelector('.pizzas')
 
 pesquisaList = document.querySelector('#datalistOptions');
 pesquisa.addEventListener("keyup", function() {
@@ -10,10 +11,27 @@ pesquisa.addEventListener("keyup", function() {
             response.json()
                 .then(function (data) {
 				pesquisaList.innerHTML = ""
+				divPizzas.innerHTML = ""
 				console.log(data)
                    data.map((item)=>{
 					   console.log(item.nome_Pizza)
 					   pesquisaList.innerHTML += `<option value="${item.nome_Pizza}">`
+					   divPizzas.innerHTML+=`<div class="card mx-3 my-4 shadow pizzas" style="width: 18rem">
+												<img src="${item.caminho_img_Pizza}" class="card-img-top">
+													<div class="card-body">
+														<p>${item.id_Pizza}</p>
+														<h5 class="card-title">${item.nome_Pizza}</h5>
+														<div class="shadow-lg p-3 mb-5 bg-white rounded">
+														<h6 class="">Ingredientes</h6>
+														<br>
+														<p class="card-text">${item.descricao_Pizza}</p>
+														</div>
+														<h4 class="font-weight-bold text-center">Valor: R$ ${item.valor_Pizza}</h4>
+														${item.estoque_Pizza}<br>
+														${item.tipo_Pizza}<br>
+														<br> <a href="#" class="btn btn-danger">Confira</a>
+													</div>
+												</div>`
 				   })
                 });
 			})
