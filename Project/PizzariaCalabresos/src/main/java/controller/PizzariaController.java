@@ -23,7 +23,7 @@ import model.PizzaDAO;
  */
 
 @WebServlet(urlPatterns = { "/cadastrarPizza", "/viewCadastrarPizza", "/cardapio", "/consultarPizza",
-		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza","/consultarPesquisaPizza" })
+		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza","/consultarPesquisaPizza", "/consultarPorIdPizza" })
 @MultipartConfig
 public class PizzariaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -66,6 +66,9 @@ public class PizzariaController extends HttpServlet {
 		} else if (action.equals("/deletarPizza")) {
 			System.out.print("IF");
 			DeletarPizza(request, response);
+		}
+		else if (action.equals("/consultarPorIdPizza")) {
+			ConsultarPizzaPorId(request, response);
 		}
 	}
 
@@ -183,6 +186,13 @@ public class PizzariaController extends HttpServlet {
 		String pesquisa = request.getParameter("txtPesquisaPizza")+"%";
 		String descricao = request.getParameter("txtPesquisaPizza")+"%";
 		ArrayList<PizzaBeans> listaPizza = daoPizza.pesquisaPizzas(pesquisa,descricao);
+		response.getWriter().append(gson.toJson(listaPizza));
+	}
+
+	protected void ConsultarPizzaPorId(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Integer id = Integer.parseInt(request.getParameter("txtIdPizza"));
+		ArrayList<PizzaBeans> listaPizza = daoPizza.consultaIdPizzas(id);
 		response.getWriter().append(gson.toJson(listaPizza));
 	}
 
