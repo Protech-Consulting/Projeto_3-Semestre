@@ -19,12 +19,25 @@
 <script defer src="./JS/modalPizza.js"></script>
 </head>
 <body>
+
 		<div class="modalPizza closed">
 	</div>
-	<label for="exampleDataList" class="form-label">Datalist
-		example</label>
+	
+	<!-- NAV BAR -->
+    <nav class="navbar navbar-expand-lg px-3">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="uploads/calabreso's.jpeg" alt="Logo dos calabreso's" width="85em">
+                <p style="color: #E32323; font-weight: 700; font-size: 1.3em; margin: 0.1em 0 0 .2em;">Calabreso's</p>
+            </a>
+        </div>
+        <span class="navbar-text d-flex align-items-center px-4">
+            <img src="uploads/sacola.png" alt="Imagem de uma sacola" width="50em">
+        </span>
+    </nav>
+    
 	<input class="form-control" list="datalistOptions" id=txtPesquisa
-		placeholder="Type to search...">
+		placeholder="Pequise sua pizza...">
 	<datalist id="datalistOptions">
 		<option value="San Francisco">
 		<option value="New York">
@@ -34,12 +47,12 @@
 	</datalist>
 	<select class="form-select" aria-label="Default select example"
 		id="selectTipoPizza">
-		<option selected>Selecione</option>
+		<option selected>Selecione o tipo de pizza</option>
 		<option value="doce">Doce</option>
 		<option value="salgada">Salgada</option>
 		<option value="todas">Todos os tipos</option>
 	</select>
-	<div class="container d-flex flex-wrap pizzas">
+	<div class="container d-flex flex-wrap justify-content-center pizzas">
 		<%
 		ArrayList<PizzaBeans> listaPizza = (ArrayList<PizzaBeans>) request.getAttribute("pizzas");
 		for (int i = 0; i < listaPizza.size(); i++) {

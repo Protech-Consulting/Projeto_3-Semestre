@@ -14,43 +14,37 @@ function abrirModal(id) {
 					console.log(data)
 					data.map((item) => {
 						console.log(item.nome_Pizza)
-						modal.innerHTML += `							
-				<button onClick="fecharModal()">X</button><div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="card mx-3 my-4 shadow w-100">
-						<img src="${item.caminho_img_Pizza}"
-							class="card-img-top w-100">
-					</div>
-				</div>
-				<div class="col-md-7">
-					<div class="card-body w-100">
-							<p>1</p>
-							<h5 class="card-title">${item.nome_Pizza}</h5>
-							<div class="shadow-lg p-3 mb-5 bg-white rounded">
-								<h6 class="">Ingredientes</h6>
-								<br>
-								<p class="card-text">${item.descricao_Pizza}</p>
-							</div>
-							<h4 class="font-weight-bold text-center">Valor: R$ ${item.valor_Pizza}</h4>
-							${item.tipo_Pizza}<br>
-							<br> <br>
-							<button name="btn-confira"
-								onClick="realizarPedido()"
-								class="btn btn-danger"
-								value="1">Confira</button>
+						modal.innerHTML += `
+		<button id="botao-fechar-modal" onClick="fecharModal()"></button>
+		<div id="adicionar-pizzas-modal">
+			<div class="container">
+                <div class="bg-$gray-100 p-3 px-5 rounded text-center d-flex flex-column align-items-center"
+                    style="background-color: #F2F2F2; box-shadow: #0004 0 9px 5.1px;">
+                                   
+		                    <img src="${item.caminho_img_Pizza}" alt="Imagem de uma Pizza" width="270" style="border-radius: .7em;">
+		                    <h2>${item.nome_Pizza}</h2>
+	                           
+	                    <div class="mt-0" style="width:65%;">
+		                    <h4 class="text-center py-1 px-2"
+	                        style="background-color: #860000; border-radius: 10em; color: #fff; font-size: 1.2em; margin: 1.2em 25%;">${item.tipo_Pizza}</h4>
+		                    <p class="text-center">${item.descricao_Pizza}</p>                    
+                    	</div>
+
+                    
+                    <h2 class="mb-2">R$0,00</h2>
+					<div class="quantidade mb-3"> 
+						<p style="font-size:1.5em;">Quantidade</p>
+						<div class="d-flex justify-content-center gap-4 align-items-center">
+							<button type="button" class="btn btn-outline-secondary">-</button>
+							<p class="mt-2" style="font-size:1.6em;">1</p>
+							<button type="button" class="btn btn-primary">+</button>						
 						</div>
-				</div>
-				<div class="col-md-2">
-					<div class="quantidade my-4"> 
-								<p>quantidade </p>
-								<button>-</button>
-								<span>1</span>
-								<button>+</button>
-							</div>
+					</div>
+					<button name="btn-confira" onClick="realizarPedido()" class="btn btn-danger mb-4" value="1" style="font-size:1.7em;">Confira</button>
 				</div>
 			</div>
-		</div>`
+		</div>`;
+
 					})
 				});
 		})
