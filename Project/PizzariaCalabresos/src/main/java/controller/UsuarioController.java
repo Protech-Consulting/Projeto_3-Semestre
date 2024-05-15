@@ -22,7 +22,7 @@ import model.UsuarioDAO;
 /**
  * Servlet implementation class UsuarioController
  */
-@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/cadastrarUsuario","/logarUsuario","/editarUsuario","/deslogarUsuario"})
+@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/viewLoginUsuario","/cadastrarUsuario","/logarUsuario","/editarUsuario","/deslogarUsuario"})
 public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UsuarioDAO daoUsuario = new UsuarioDAO();
@@ -48,11 +48,11 @@ public class UsuarioController extends HttpServlet {
 		if (action.equals("/viewCadastrarUsuario")) {
 			TelaCadastro(request, response);
 		}
+		else if (action.equals("/viewLoginUsuario")) {
+			TelaLogin(request, response);
+		}
 		else if (action.equals("/consultarUsuario")) {
 			
-		}
-		else if (action.equals("/logarUsuario")) {
-			LoginUsuario(request, response);
 		}
 		else if (action.equals("/editarUsuario")) {
 			EditarUsuario(request, response);
@@ -73,23 +73,17 @@ public class UsuarioController extends HttpServlet {
 		if (action.equals("/cadastrarUsuario")) {
 			CadastrarUsuario(request, response);
 		}
+		else if (action.equals("/logarUsuario")) {
+			LoginUsuario(request, response);
+		}
 	}
 	protected void TelaCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Object cd = session.getValue("id_usuario");
-		response.getWriter().append("Código Usuario"+cd.toString());
-		Object nv = session.getValue("nivel_usuario");
-		System.out.print("Dados Aqui");
-		System.out.print(cd);
-		if (nv.equals(2)) {
-			System.out.print("Adminastro");
-		}
-		else {
-			System.out.print("Usuario");
-		}
-		
 		response.sendRedirect("view/cadastroUsuario.jsp");
+	}
+	protected void TelaLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendRedirect("view/loginUsuario.jsp");
 	}
 	protected void CadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -125,8 +119,8 @@ public class UsuarioController extends HttpServlet {
 			throws ServletException, IOException {
 		//String user = "user";
 		//String password = "Gus123";
-		String user = "user123";
-		String password = "Gus";
+		String user = request.getParameter("txtUsuario");
+		String password = request.getParameter("txtSenha");
 		password = security.Criptografia.criptografar(password);
 		ArrayList<UsuarioBeans> listaUsuario = daoUsuario.loginUsuario(user,password);
 		
