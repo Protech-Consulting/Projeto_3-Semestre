@@ -26,17 +26,12 @@
 	<input class="form-control" list="datalistOptions" id=txtPesquisa
 		placeholder="Type to search...">
 	<datalist id="datalistOptions">
-		<option value="San Francisco">
-		<option value="New York">
-		<option value="Seattle">
-		<option value="Los Angeles">
-		<option value="Chicago">
 	</datalist>
 	<select class="form-select" aria-label="Default select example"
 		id="selectTipoPizza">
 		<option selected>Selecione</option>
-		<option value="doce">Doce</option>
-		<option value="salgada">Salgada</option>
+		<option value="Doce">Doce</option>
+		<option value="Salgada">Salgada</option>
 		<option value="todas">Todos os tipos</option>
 	</select>
 	<div class="container d-flex flex-wrap pizzas">
