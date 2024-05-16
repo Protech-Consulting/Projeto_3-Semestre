@@ -1,16 +1,39 @@
 @charset "UTF-8";
-.modalPizza.open{
-	display: block;
+.modalPizza.open {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background: #00000054;
     width: 100%;
     height: 100%;
     position: fixed;
     z-index: 1;
+    padding: 4vh 0;
     
-    .container{
-    	background: white;
+    #adicionar-pizzas-modal {
+    	z-index: 1;
+    	display: flex;
+    }
+    
+    .container {
+    	display: flex;
+    	justify-content: center;
+    	background-color: #fff6;
+    	border-radius: 10em;
+    	padding: 0;
+    }
+    
+    
+    #botao-fechar-modal {
+    	opacity: 0;
+    	position: fixed;
+    	z-index: 0;
+    	width:100%;
+    	height:100%;
+    	top: 0;
     }
 }
-.modalPizza.closed{
+
+.modalPizza.closed {
 	display: none
 }
