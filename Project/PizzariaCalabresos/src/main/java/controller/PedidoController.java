@@ -98,7 +98,7 @@ public class PedidoController extends HttpServlet {
 			System.out.println("Id Pizza:"+request.getParameter("txtIdPizza"));
 			beansPedido.setId_pizza(Integer.parseInt(request.getParameter("txtIdPizza")));
 			beansPedido.setId_pedido_cliente(Integer.parseInt(id_pedido_cliente.toString()));
-			beansPedido.setQuantidade(2);
+			beansPedido.setQuantidade(Integer.parseInt(request.getParameter("txtQuantidadePizza")));
 			daoPedido.cadastrarPedido(beansPedido);
 		}
 		
