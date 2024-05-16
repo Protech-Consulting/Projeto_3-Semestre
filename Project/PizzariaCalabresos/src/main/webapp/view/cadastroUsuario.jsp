@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="../imgs/pizza.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script defer type="text/javascript" src="../JS/cadastroUsuario.js"></script>
 </head>
 
 <body>
@@ -53,16 +54,22 @@
                 <!-- Coluna 1 -->
                 <div class="col-sm">
                     <!-- Formulário -->
-                    <form class="d-grid gap-4" action="">
+                    <form class="d-grid gap-4" action="../cadastrarUsuario" method="POST">
 
                         <!-- Linha 3 (Usuário) -->
                         <div class="row">
+                        	<!-- Nome -->
+                            <div class="form-group">
+                                <label for="nome-usuario" class="my-2" style="font-size: 1.5em;">Nome</label>
+                                <input type="text" class="form-control" id="nome-usuario"
+                                    placeholder="Digite seu nome" style="font-size: 1.2em;">
+                            </div>
 
                             <!-- Usuário -->
                             <div class="form-group">
                                 <label for="nome-usuario" class="my-2" style="font-size: 1.5em;">Usuário</label>
-                                <input type="text" class="form-control" id="nome-usuario"
-                                    placeholder="Digite seu nome" style="font-size: 1.2em;">
+                                <input type="text" class="form-control" id="user-usuario"
+                                    placeholder="Digite seu Usuario" style="font-size: 1.2em;">
                             </div>
 
                         </div>

@@ -87,7 +87,7 @@ public class UsuarioController extends HttpServlet {
 	}
 	protected void CadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String user = "user123";
+		String user = "user1234556test3";
 		String password = "Gus";
 		int nivel_acesso = 1;
 		String nome = "Gus";
@@ -111,6 +111,16 @@ public class UsuarioController extends HttpServlet {
 		beansUsuario.setNumeroCasa_Usuario(numero);
 		
 		daoUsuario.cadastrarUsuario(beansUsuario);
+		String retorno = String.valueOf(beansUsuario.getId_Usuario());
+		System.out.print("Retorno:"+retorno);
+		response.getWriter().append(retorno);
+		if(retorno.isEmpty() == true || retorno == null || retorno.equals("0") ) {
+			response.getWriter().append("Usuario não Cadastrado");
+		}
+		else {
+			response.getWriter().append("Usuario Cadastrado");
+			response.sendRedirect("viewLoginUsuario");
+		}
 		
 		
 		
@@ -144,6 +154,7 @@ public class UsuarioController extends HttpServlet {
 			Object cd = session.getValue("id_usuario");
 			response.getWriter().append("Código Usuario"+cd.toString());
 			response.getWriter().append("Nivel Usuario"+nv.toString());
+			response.sendRedirect("consultarPizza");
 		}
 		
 	}

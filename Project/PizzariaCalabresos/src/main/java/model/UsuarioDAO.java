@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import conexao.conecta;
@@ -13,7 +14,7 @@ public class UsuarioDAO {
 		try {
 			Connection conn = conecta.getConnection();
 			String sql = "insert into tbusuario (user_usuario,password_usuario,nivel_acesso_usuario,nome_usuario,cpf_usuario,complemento_usuario,celular_usuario,rua_usuario,bairro_usuario,numeroCasa_usuario) values (?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, usuario.getUser_Usuario());
 			stmt.setString(2, usuario.getPassword_Usuario());
 			stmt.setInt(3, usuario.getNivel_acesso_Usuario());
@@ -26,6 +27,12 @@ public class UsuarioDAO {
 			stmt.setInt(10, usuario.getNumeroCasa_Usuario());
 			System.out.print(stmt);
 			stmt.execute();
+			ResultSet rs = stmt.getGeneratedKeys();
+			int id = 0;
+			if(rs.next()){
+			    id = rs.getInt(1);
+			}
+			usuario.setId_Usuario(id);
 			stmt.close();
 			conn.close();
 			System.out.print("OK");
