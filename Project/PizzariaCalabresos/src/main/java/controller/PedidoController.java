@@ -89,6 +89,10 @@ public class PedidoController extends HttpServlet {
 			System.out.printf("Sessao");
 			System.out.printf(String.valueOf(beansPedidoCliente.getId_Pedido_Cliente()));
 			System.out.printf(dateFormat.format(date));
+			beansPedido.setId_pizza(Integer.parseInt(request.getParameter("txtIdPizza")));
+			beansPedido.setId_pedido_cliente(beansPedidoCliente.getId_Pedido_Cliente());
+			beansPedido.setQuantidade(Integer.parseInt(request.getParameter("txtQuantidadePizza")));
+			daoPedido.cadastrarPedido(beansPedido);
 		}
 		else {
 			Object id_pedido_cliente = session.getValue("id_pedido_cliente");
