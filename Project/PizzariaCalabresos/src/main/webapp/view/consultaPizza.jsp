@@ -41,13 +41,8 @@
     
     <div class="d-flex align-items-center flex-column mb-2">
 		<input class="form-control" list="datalistOptions" id=txtPesquisa
-			placeholder="Pequise sua pizza..." style="width:40vw; font-size:1.3em;">
+			placeholder="Pequise uma pizza" style="width:40vw; font-size:1.3em;">
 		<datalist id="datalistOptions">
-			<option value="San Francisco">
-			<option value="New York">
-			<option value="Seattle">
-			<option value="Los Angeles">
-			<option value="Chicago">
 		</datalist>
 		
 		<select class="form-select" aria-label="Default select example"
