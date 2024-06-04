@@ -22,7 +22,7 @@ import model.UsuarioDAO;
 /**
  * Servlet implementation class UsuarioController
  */
-@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/viewLoginUsuario","/cadastrarUsuario","/logarUsuario","/editarUsuario","/deslogarUsuario"})
+@WebServlet(urlPatterns = { "/viewCadastrarUsuario","/viewLoginUsuario","/cadastrarUsuario","/logarUsuario","/editarUsuario","/deslogarUsuario","/admin/viewLogin"})
 public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UsuarioDAO daoUsuario = new UsuarioDAO();
@@ -87,16 +87,16 @@ public class UsuarioController extends HttpServlet {
 	}
 	protected void CadastrarUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String user = "user1234556test3";
-		String password = "Gus";
+		String user = request.getParameter("txtUserUsuario");
+		String password = request.getParameter("txtSenhaUsuario");
 		int nivel_acesso = 1;
-		String nome = "Gus";
-		String cpf = "12345678910";
-		String complemento = "rua do cara mais lindo de todos";
-		String celular = "11961535779";
-		String rua = "Rua Elias checone";
-		String  bairro = "Vila rosalina";
-		int numero = 25;
+		String nome = request.getParameter("txtNomeUsuario");
+		String cpf = request.getParameter("txtCpfUsuario");
+		String complemento = request.getParameter("txtComplementoUsuario");
+		String celular = request.getParameter("txtTelefoneUsuario");
+		String rua = request.getParameter("txtRuaUsuario");
+		String  bairro = request.getParameter("txtBairroUsuario");
+		int numero = Integer.parseInt(request.getParameter("txtNumeroRuaUsuario"));
 		password = security.Criptografia.criptografar(password);
 		
 		beansUsuario.setUser_Usuario(user);

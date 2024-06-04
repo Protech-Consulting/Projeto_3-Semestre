@@ -62,13 +62,13 @@
                             <div class="form-group">
                                 <label for="nome-usuario" class="my-2" style="font-size: 1.5em;">Nome</label>
                                 <input type="text" class="form-control" id="nome-usuario"
-                                    placeholder="Digite seu nome" style="font-size: 1.2em;">
+                                    placeholder="Digite seu nome" name="txtNomeUsuario" style="font-size: 1.2em;">
                             </div>
 
                             <!-- Usuário -->
                             <div class="form-group">
                                 <label for="nome-usuario" class="my-2" style="font-size: 1.5em;">Usuário</label>
-                                <input type="text" class="form-control" id="user-usuario"
+                                <input type="text" class="form-control" id="user-usuario" name="txtUserUsuario"
                                     placeholder="Digite seu Usuario" style="font-size: 1.2em;">
                             </div>
 
@@ -82,7 +82,7 @@
                                 <!-- Senha -->
                                 <div class="form-group">
                                     <label for="senha-usuario" class="my-2" style="font-size: 1.5em;">Senha</label>
-                                    <input type="text" class="form-control" id="senha-usuario"
+                                    <input type="text" class="form-control" id="senha-usuario" name="txtSenhaUsuario"
                                         placeholder="Digite sua senha" style="font-size: 1.2em;">
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                 <!-- Telefone -->
                                 <div class="form-group">
                                     <label for="telefone-usuario" class="my-2" style="font-size: 1.5em;">Telefone</label>
-                                    <input type="text" class="form-control" id="telefone-usuario"
+                                    <input type="text" class="form-control" id="telefone-usuario" name="txtTelefoneUsuario"
                                         placeholder="(11) 91234-5678" style="font-size: 1.2em;">
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                 <!-- CPF -->
                                 <div class="form-group">
                                     <label for="cpf-usuario" class="my-2" style="font-size: 1.5em;">CPF</label>
-                                    <input type="text" class="form-control" id="cpf-usuario"
+                                    <input type="text" class="form-control" id="cpf-usuario" name="txtCpfUsuario"
                                         placeholder="000.000.000-00" style="font-size: 1.2em;">
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
                             <!-- CEP -->
                             <div class="form-group">
                                 <label for="cep-usuario" class="my-2" style="font-size: 1.5em;">CEP</label>
-                                <input type="text" class="form-control" id="cep-usuario"
+                                <input type="text" class="form-control" id="cep-usuario" name="txtCepUsuario"
                                     placeholder="Digite seu CEP" style="font-size: 1.2em;">
                             </div>
 
@@ -145,7 +145,7 @@
                                 <!-- Rua -->
                                 <div class="form-group">
                                     <label for="rua-usuario" class="my-2" style="font-size: 1.5em;">Rua</label>
-                                    <input type="text" class="form-control" id="rua-usuario"
+                                    <input type="text" class="form-control" id="rua-usuario" name="txtRuaUsuario"
                                         style="font-size: 1.2em;">
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                                 <!-- Bairro -->
                                 <div class="form-group">
                                     <label for="bairro-usuario" class="my-2" style="font-size: 1.5em;">Bairro</label>
-                                    <input type="text" class="form-control" id="bairro-usuario"
+                                    <input type="text" class="form-control" id="bairro-usuario" name="txtBairroUsuario"
                                         style="font-size: 1.2em;">
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                                 <!-- Número -->
                                 <div class="form-group">
                                     <label for="numero-rua-usuario" class="my-2" style="font-size: 1.5em;">Número</label>
-                                    <input type="text" class="form-control" id="numero-rua-usuario"
+                                    <input type="text" class="form-control" id="numero-rua-usuario" name="txtNumeroRuaUsuario"
                                         placeholder="Digite o número de sua residência" style="font-size: 1.2em;">
                                 </div>
                             </div>
@@ -180,7 +180,7 @@
                                 <!-- Complemento-->
                                 <div class="form-group">
                                     <label for="complemento-usuario" class="my-2" style="font-size: 1.5em;">Complemento</label>
-                                    <input type="text" class="form-control" id="complemento-usuario"
+                                    <input type="text" class="form-control" id="complemento-usuario" name="txtComplementoUsuario"
                                         style="font-size: 1.2em;">
                                 </div>
                             </div>

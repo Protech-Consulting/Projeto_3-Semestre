@@ -20,11 +20,12 @@ import model.PedidoBeans;
 import model.PedidoClienteBeans;
 import model.PedidoClienteDAO;
 import model.PedidoDAO;
+import model.PizzaBeans;
 
 /**
  * Servlet implementation class PedidoController
  */
-@WebServlet(urlPatterns = {"/cadastrarPedido"})
+@WebServlet(urlPatterns = {"/cadastrarPedido","/viewPedido"})
 public class PedidoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -54,6 +55,9 @@ public class PedidoController extends HttpServlet {
 
 		if (action.equals("/cadastrarPedido")) {
 			telaCadastroPedido(request, response);
+		}
+		else if (action.equals("/viewPedido")) {
+			telaPedido(request, response);
 		}
 	}
 
@@ -105,17 +109,20 @@ public class PedidoController extends HttpServlet {
 			beansPedido.setQuantidade(Integer.parseInt(request.getParameter("txtQuantidadePizza")));
 			daoPedido.cadastrarPedido(beansPedido);
 		}
-		
-		
-		/*ArrayList<PizzaBeans> listaPizza = daoPizza.consultaPizzas();
-		request.setAttribute("pizzas", listaPizza);
-		System.out.println();
-		System.out.println();
-		System.out.println(gson.toJson(listaPizza));
-		response.getWriter().append(gson.toJson(listaPizza));
-		RequestDispatcher rd = request.getRequestDispatcher("view/consultaPizza.jsp");
-		rd.forward(request, response);*/
 	
+	}
+	protected void telaPedido(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Object id_pedido_cliente = session.getValue("id_pedido_cliente");
+		ArrayList<PedidoBeans> listaPedido = daoPedido.consultaPedido(Integer.parseInt(id_pedido_cliente.toString()));
+		request.setAttribute("pedidos", listaPedido);
+		System.out.println();
+		System.out.println();
+		System.out.println(gson.toJson(listaPedido));
+		response.getWriter().append(gson.toJson(listaPedido));
+		RequestDispatcher rd = request.getRequestDispatcher("view/Pedido.jsp");
+		rd.forward(request, response);
 	}
 
 }
