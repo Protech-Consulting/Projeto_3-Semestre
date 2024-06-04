@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
@@ -23,7 +24,8 @@ import model.PizzaDAO;
  */
 
 @WebServlet(urlPatterns = { "/cadastrarPizza", "/viewCadastrarPizza", "/cardapio", "/consultarPizza",
-		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza","/consultarPesquisaPizza", "/consultarPorIdPizza" })
+		"/consultarPorTipoPizza", "/viewAtualizarPizza", "/atualizarPizza", "/deletarPizza", "/consultarPesquisaPizza",
+		"/consultarPorIdPizza" })
 @MultipartConfig
 public class PizzariaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,12 +53,49 @@ public class PizzariaController extends HttpServlet {
 		// Ação a partir da Url Recebida
 
 		if (action.equals("/viewCadastrarPizza")) {
-			telaCadastro(request, response);
+			HttpSession session = request.getSession();
+			Object usuarioSession;
+			Object NivelusuarioSession;
+			try {
+				NivelusuarioSession = session.getValue("nivel_usuario").toString();
+				usuarioSession = session.getValue("id_usuario");
+				System.out.print("Nivel" + NivelusuarioSession.toString());
+				if (NivelusuarioSession.toString().equals("2")) {
+					telaCadastro(request, response);
+				} else {
+					System.out.print("else");
+					response.sendRedirect("admin/viewLogin");
+				}
+			} catch (Exception e) {
+				response.sendRedirect("admin/viewLogin");
+			}
 		} else if (action.equals("/viewAtualizarPizza")) {
-			TelaAtualizarPizza(request, response);
+			HttpSession session = request.getSession();
+			Object usuarioSession=null;
+			Object NivelusuarioSession=null;
+			try {
+				NivelusuarioSession = session.getValue("nivel_usuario").toString();
+				usuarioSession = session.getValue("id_usuario");
+				System.out.print("Nivel" + NivelusuarioSession.toString());
+			} catch (Exception e) {
+				response.sendRedirect("admin/viewLogin");
+			}
+			if (NivelusuarioSession.toString().equals("2")) {
+				TelaAtualizarPizza(request, response);
+			} else {
+				System.out.print("else");
+				response.sendRedirect("admin/viewLogin");
+			}
 		} else if (action.equals("/consultarPizza")) {
-			System.out.print("IF");
-			ConsultarPizza(request, response);
+			HttpSession session = request.getSession();
+			Object usuarioSession;
+			usuarioSession = session.getValue("id_usuario");
+			if (usuarioSession == null) {
+				response.sendRedirect("viewLoginUsuario");
+			} else {
+				System.out.print("IF");
+				ConsultarPizza(request, response);
+			}
 		} else if (action.equals("/consultarPorTipoPizza")) {
 			System.out.print("IF");
 			ConsultarTipoPizza(request, response);
@@ -66,8 +105,7 @@ public class PizzariaController extends HttpServlet {
 		} else if (action.equals("/deletarPizza")) {
 			System.out.print("IF");
 			DeletarPizza(request, response);
-		}
-		else if (action.equals("/consultarPorIdPizza")) {
+		} else if (action.equals("/consultarPorIdPizza")) {
 			ConsultarPizzaPorId(request, response);
 		}
 	}
@@ -103,19 +141,18 @@ public class PizzariaController extends HttpServlet {
 		beansPizza.setValor_Pizza(Double.parseDouble(request.getParameter("txtValorPizza")));
 		beansPizza.setEstoque_Pizza(Boolean.parseBoolean(request.getParameter("txtEstoquePizza")));
 		beansPizza.setTipo_Pizza(request.getParameter("txtTipoPizza"));
-		
-		String path = getServletContext().getRealPath("uploads"); 
+
+		String path = getServletContext().getRealPath("uploads");
 		try {
-			for(Part part : request.getParts()) {
+			for (Part part : request.getParts()) {
 				if (part.getName().equals("txtCaminhoImgPizza")) {
-					System.out.println(path+File.separator+part.getSubmittedFileName());
-					part.write(path+File.separator+part.getSubmittedFileName());
-					beansPizza.setCaminho_img_Pizza("uploads/"+part.getSubmittedFileName());
+					System.out.println(path + File.separator + part.getSubmittedFileName());
+					part.write(path + File.separator + part.getSubmittedFileName());
+					beansPizza.setCaminho_img_Pizza("uploads/" + part.getSubmittedFileName());
 				}
 			}
-		}
-		catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 
 		System.out.println(beansPizza.isEstoque_Pizza());
@@ -179,13 +216,14 @@ public class PizzariaController extends HttpServlet {
 		ArrayList<PizzaBeans> listaPizza = daoPizza.consultaTipoPizzas(tipo);
 		response.getWriter().append(gson.toJson(listaPizza));
 	}
+
 	protected void ConsultarPesquisaPizza(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		System.out.printf("Aqui");
-		String pesquisa = request.getParameter("txtPesquisaPizza")+"%";
-		String descricao = request.getParameter("txtPesquisaPizza")+"%";
-		ArrayList<PizzaBeans> listaPizza = daoPizza.pesquisaPizzas(pesquisa,descricao);
+		String pesquisa = request.getParameter("txtPesquisaPizza") + "%";
+		String descricao = request.getParameter("txtPesquisaPizza") + "%";
+		ArrayList<PizzaBeans> listaPizza = daoPizza.pesquisaPizzas(pesquisa, descricao);
 		response.getWriter().append(gson.toJson(listaPizza));
 	}
 
