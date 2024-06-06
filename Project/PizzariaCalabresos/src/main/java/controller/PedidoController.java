@@ -25,7 +25,7 @@ import model.PizzaBeans;
 /**
  * Servlet implementation class PedidoController
  */
-@WebServlet(urlPatterns = {"/cadastrarPedido","/viewPedido"})
+@WebServlet(urlPatterns = {"/cadastrarPedido","/viewPedido","/finalizarPedido"})
 public class PedidoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -56,6 +56,9 @@ public class PedidoController extends HttpServlet {
 		if (action.equals("/cadastrarPedido")) {
 			telaCadastroPedido(request, response);
 		}
+		else if (action.equals("/finalizarPedido")) {
+			finalizarPedido(request, response);
+		}
 		else if (action.equals("/viewPedido")) {
 			telaPedido(request, response);
 		}
@@ -66,7 +69,9 @@ public class PedidoController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String action = request.getServletPath();
+		System.out.print(action);
 	}
 	protected void telaCadastroPedido(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -123,6 +128,17 @@ public class PedidoController extends HttpServlet {
 		response.getWriter().append(gson.toJson(listaPedido));
 		RequestDispatcher rd = request.getRequestDispatcher("view/Pedido.jsp");
 		rd.forward(request, response);
+	}
+	protected void finalizarPedido(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Object id_pedido_cliente = session.getValue("id_pedido_cliente");
+		System.out.println(id_pedido_cliente);
+		System.out.println(request.getParameter("totalPedido"));
+		beansPedidoCliente.setValor_Total(Double.parseDouble(request.getParameter("totalPedido")));
+		beansPedidoCliente.setId_Pedido_Cliente(Integer.parseInt(id_pedido_cliente.toString()));
+		daoPedidoCliente.FinalizarPedido(beansPedidoCliente);
+		
 	}
 
 }

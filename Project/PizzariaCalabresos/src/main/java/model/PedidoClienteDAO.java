@@ -32,5 +32,24 @@ public class PedidoClienteDAO {
 			System.out.print("ERRO: " + e);
 		}
 	}
+	public void FinalizarPedido(PedidoClienteBeans pedido) {
+		try {
+			Connection conn = conecta.getConnection();
+			String sql = "UPDATE tbpedidocliente SET valor_total = ?, tipo_pagamento = 'debito', pagamento = 1 WHERE id_pedido_cliente = ?";
+			System.out.println(pedido.getValor_Total());
+			System.out.println(pedido.getId_Pedido_Cliente());
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setDouble(1, pedido.getValor_Total());
+			stmt.setInt(2, pedido.getId_Pedido_Cliente());
+			System.out.print(sql);
+			stmt.execute();
+			stmt.close();
+			conn.close();
+			System.out.print("OK");
+			System.out.print(sql);
+		} catch (Exception e) {
+			System.out.print("ERRO: " + e);
+		}
+	}
 
 }
