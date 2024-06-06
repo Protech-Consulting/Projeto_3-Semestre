@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link href="CSS/telaPedido.css" rel="stylesheet">
+	<script defer src="./JS/PagamentoPedido.js"></script>
 </head>
 <body>
 
@@ -37,9 +38,11 @@
         <br>
         <%
         double total=0;
+        int quantidade;
 		ArrayList<PedidoBeans> listaPedido = (ArrayList<PedidoBeans>) request.getAttribute("pedidos");
 		for (int i = 0; i < listaPedido.size(); i++) {
-			total+=listaPedido.get(i).getValor();
+			quantidade = listaPedido.get(i).getQuantidade();
+			total+=listaPedido.get(i).getValor()*quantidade;
 		%>
 		
         <div class="cart-wrapper">
@@ -64,7 +67,7 @@
         <div class="text-center mt-4">
             <h2>Total: R$<%=total%></h2>
             <br>
-            <button class="btn btn-primary" style="font-size: 1.5em;">Finalizar Compra</button>
+            <button class="btn btn-primary" onClick="FinalizarPedido(<%=total%>)" style="font-size: 1.5em;">Finalizar Compra</button>
         </div>
     </div>
 </div>
